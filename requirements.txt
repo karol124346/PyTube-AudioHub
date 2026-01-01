@@ -1,0 +1,24 @@
+# PyTube-AudioHub - Dependencias
+
+# Framework Web
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+python-multipart>=0.0.9
+
+# WebSocket Support
+websockets>=12.0
+
+# Descargas de YouTube
+yt-dlp>=2024.1.0
+
+# Web Scraping
+aiohttp>=3.9.0
+beautifulsoup4>=4.12.0
+
+# Metadatos ID3 para MP3
+mutagen>=1.47.0
+requests>=2.31.0
+
+# Utilidades
+jinja2>=3.1.0
+aiofiles>=23.0.0

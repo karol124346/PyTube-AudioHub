@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyTube-AudioHub - YouTube Downloader MP3/MP4</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FF0000'><path d='M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z'/></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                    <h1>PyTube-AudioHub</h1>
+                </div>
+                <div class="server-status" id="serverStatus">
+                    <span class="status-dot online"></span>
+                    <span class="status-text">En línea</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Download Options Section -->
+            <section class="options-section">
+                <div class="options-container">
+                    <!-- Format Selection -->
+                    <div class="option-group">
+                        <label class="option-label">Formato de descarga</label>
+                        <div class="format-selector">
+                            <label class="format-option audio selected" data-format="audio">
+                                <input type="radio" name="download_format" value="audio" checked>
+                                <div class="format-content">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 18V5l12-2v13"/>
+                                        <circle cx="6" cy="18" r="3"/>
+                                        <circle cx="18" cy="16" r="3"/>
+                                    </svg>
+                                    <span class="format-name">MP3</span>
+                                    <span class="format-desc">Audio only</span>
+                                </div>
+                            </label>
+                            <label class="format-option video" data-format="video">
+                                <input type="radio" name="download_format" value="video">
+                                <div class="format-content">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/>
+                                        <line x1="7" y1="2" x2="7" y2="22"/>
+                                        <line x1="17" y1="2" x2="17" y2="22"/>
+                                        <line x1="2" y1="12" x2="22" y2="12"/>
+                                        <line x1="2" y1="7" x2="7" y2="7"/>
+                                        <line x1="2" y1="17" x2="7" y2="17"/>
+                                        <line x1="17" y1="17" x2="22" y2="17"/>
+                                        <line x1="17" y1="7" x2="22" y2="7"/>
+                                    </svg>
+                                    <span class="format-name">MP4</span>
+                                    <span class="format-desc">Video + Audio</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Playlist Toggle -->
+                    <div class="option-group">
+                        <label class="option-label">Opciones avanzadas</label>
+                        <div class="playlist-toggle-container">
+                            <label class="playlist-toggle">
+                                <input type="checkbox" id="playlistToggle" name="is_playlist">
+                                <span class="toggle-slider"></span>
+                                <span class="toggle-label">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="8" y1="6" x2="21" y2="6"/>
+                                        <line x1="8" y1="12" x2="21" y2="12"/>
+                                        <line x1="8" y1="18" x2="21" y2="18"/>
+                                        <line x1="3" y1="6" x2="3.01" y2="6"/>
+                                        <line x1="3" y1="12" x2="3.01" y2="12"/>
+                                        <line x1="3" y1="18" x2="3.01" y2="18"/>
+                                    </svg>
+                                    Descargar Playlist completa
+                                </span>
+                            </label>
+                            <span class="playlist-hint">descarga archivos individuales</span>
+                        </div>
+                    </div>
+
+                    <!-- Quality Settings -->
+                    <div class="option-group">
+                        <label class="option-label">Configuración de calidad</label>
+                        <div class="quality-settings">
+                            <div class="quality-item">
+                                <label for="audioQuality">🎵 Audio:</label>
+                                <select id="audioQuality" name="audio_quality">
+                                    <option value="low">Baja (96 kbps)</option>
+                                    <option value="medium">Media (128 kbps)</option>
+                                    <option value="high" selected>Alta (192 kbps)</option>
+                                    <option value="best">Máxima (320 kbps)</option>
+                                </select>
+                            </div>
+                            <div class="quality-item">
+                                <label for="videoQuality">🎬 Video:</label>
+                                <select id="videoQuality" name="video_quality">
+                                    <option value="low">480p</option>
+                                    <option value="medium">720p</option>
+                                    <option value="high" selected>1080p</option>
+                                    <option value="best">4K (2160p)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Search Section -->
+            <section class="search-section">
+                <div class="search-container">
+                    <div class="search-box">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            placeholder="Buscar música, artistas, videos..." 
+                            autocomplete="off"
+                        >
+                        <button class="search-btn" id="searchBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                        <!-- Suggestions dropdown -->
+                        <div class="suggestions-dropdown" id="suggestionsDropdown">
+                            <ul class="suggestions-list" id="suggestionsList"></ul>
+                        </div>
+                    </div>
+                    <div class="search-tips">
+                        <span>🔍 Escribe para ver sugerencias o pega una URL de YouTube</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="resultsSection">
+                <div class="section-header">
+                    <h2>Resultados de Búsqueda</h2>
+                    <span class="result-count" id="resultCount"></span>
+                </div>
+                <div class="results-grid" id="resultsGrid">
+                    <div class="empty-state" id="emptyState">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                        <p>Pega una URL de YouTube para comenzar</p>
+                        <p class="search-hint">💡 Puedes descargar videos individuales o playlists completas</p>
+                    </div>
+                </div>
+                <div class="loading-indicator" id="loadingIndicator">
+                    <div class="spinner"></div>
+                    <span>Buscando en YouTube...</span>
+                    <span class="loading-hint">Esto puede tomar unos segundos...</span>
+                </div>
+            </section>
+
+            <!-- Downloads Section -->
+            <section class="downloads-section" id="downloadsSection">
+                <div class="section-header">
+                    <h2>Archivos Descargados</h2>
+                    <div class="header-actions">
+                        <button class="refresh-btn" id="refreshFilesBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 4v6h-6M1 20v-6h6"/>
+                                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="files-list" id="filesList">
+                    <div class="empty-state" id="emptyFilesState">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M9 18V5l12-2v13"/>
+                            <circle cx="6" cy="18" r="3"/>
+                            <circle cx="18" cy="16" r="3"/>
+                        </svg>
+                        <p>Aún no hay archivos descargados</p>
+                        <p class="search-hint">📥 Los archivos MP3, MP4 y playlists ZIP aparecerán aquí</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Progress Panel -->
+        <div class="progress-panel" id="progressPanel">
+            <div class="progress-header">
+                <h3>Descargas en Progreso</h3>
+                <button class="close-progress" id="closeProgressBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6 6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="progress-list" id="progressList">
+            </div>
+        </div>
+
+        <!-- Audio Preview Modal -->
+        <div class="audio-preview-modal" id="audioPreviewModal">
+            <div class="audio-preview-content">
+                <div class="audio-preview-header">
+                    <div class="audio-info">
+                        <div class="audio-waveform">
+                            <svg viewBox="0 0 200 60" class="waveform-svg">
+                                <defs>
+                                    <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" style="stop-color:#ff0000"/>
+                                        <stop offset="100%" style="stop-color:#cc0000"/>
+                                    </linearGradient>
+                                </defs>
+                                <rect class="bar" x="5" y="20" width="4" height="20"/>
+                                <rect class="bar" x="12" y="10" width="4" height="40"/>
+                                <rect class="bar" x="19" y="25" width="4" height="10"/>
+                                <rect class="bar" x="26" y="15" width="4" height="30"/>
+                                <rect class="bar" x="33" y="20" width="4" height="20"/>
+                                <rect class="bar" x="40" y="5" width="4" height="50"/>
+                                <rect class="bar" x="47" y="20" width="4" height="20"/>
+                                <rect class="bar" x="54" y="12" width="4" height="36"/>
+                                <rect class="bar" x="61" y="25" width="4" height="10"/>
+                                <rect class="bar" x="68" y="18" width="4" height="24"/>
+                                <rect class="bar" x="75" y="20" width="4" height="20"/>
+                                <rect class="bar" x="82" y="8" width="4" height="44"/>
+                                <rect class="bar" x="89" y="22" width="4" height="16"/>
+                                <rect class="bar" x="96" y="15" width="4" height="30"/>
+                                <rect class="bar" x="103" y="20" width="4" height="20"/>
+                                <rect class="bar" x="110" y="10" width="4" height="40"/>
+                                <rect class="bar" x="117" y="25" width="4" height="10"/>
+                                <rect class="bar" x="124" y="18" width="4" height="24"/>
+                                <rect class="bar" x="131" y="20" width="4" height="20"/>
+                                <rect class="bar" x="138" y="5" width="4" height="50"/>
+                                <rect class="bar" x="145" y="20" width="4" height="20"/>
+                                <rect class="bar" x="152" y="12" width="4" height="36"/>
+                                <rect class="bar" x="159" y="25" width="4" height="10"/>
+                                <rect class="bar" x="166" y="18" width="4" height="24"/>
+                                <rect class="bar" x="173" y="20" width="4" height="20"/>
+                                <rect class="bar" x="180" y="15" width="4" height="30"/>
+                                <rect class="bar" x="187" y="22" width="4" height="16"/>
+                            </svg>
+                        </div>
+                        <h3 id="audioTitle">Audio Title</h3>
+                        <p id="audioMeta">MP3 Audio</p>
+                    </div>
+                    <button class="close-preview" id="closePreviewBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 6 6 18M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="audio-controls">
+                    <div class="progress-container">
+                        <span class="time-current" id="timeCurrent">0:00</span>
+                        <div class="audio-progress-bar" id="audioProgressBar">
+                            <div class="audio-progress" id="audioProgress"></div>
+                            <div class="audio-progress-handle" id="audioProgressHandle"></div>
+                        </div>
+                        <span class="time-total" id="timeTotal">0:00</span>
+                    </div>
+                    
+                    <div class="control-buttons">
+                        <button class="control-btn" id="prevBtn" title="Anterior">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+                            </svg>
+                        </button>
+                        <button class="control-btn play-btn" id="playPauseBtn" title="Reproducir/Pausar">
+                            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+                                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                            </svg>
+                        </button>
+                        <button class="control-btn" id="nextBtn" title="Siguiente">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="volume-control">
+                        <svg class="volume-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                        </svg>
+                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="80">
+                        <span class="volume-value" id="volumeValue">80%</span>
+                    </div>
+                </div>
+                
+                <audio id="audioPlayer" preload="metadata"></audio>
+            </div>
+        </div>
+        <!-- End Audio Preview Modal -->
+        
+        <!-- Video Preview Modal -->
+        <div class="video-preview-modal" id="videoPreviewModal">
+            <div class="video-preview-content">
+                <div class="video-preview-header">
+                    <div class="video-info">
+                        <h3 id="videoTitle">Video Title</h3>
+                        <p id="videoMeta">YouTube Video</p>
+                    </div>
+                    <button class="close-preview" id="closeVideoPreviewBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 6 6 18M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="video-player-container">
+                    <div class="video-embed-wrapper" id="videoEmbedWrapper">
+                        <iframe 
+                            id="videoPlayerFrame"
+                            src="" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    
+                    <div class="video-error-container hidden" id="videoErrorContainer">
+                        <svg class="video-error-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                        </svg>
+                        <h4 class="video-error-title">Video no disponible para reproducción</h4>
+                        <p class="video-error-message">Este video tiene restricciones de版权 que impiden su reproducción externa. Puedes ver el video directamente en YouTube.</p>
+                        <a href="#" target="_blank" class="video-error-link" id="videoErrorLink">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
+                            </svg>
+                            Ver en YouTube
+                        </a>
+                    </div>
+                    
+                    <div class="video-overlay" id="videoOverlay">
+                        <button class="video-play-overlay-btn" id="videoPlayOverlayBtn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="video-controls">
+                    <div class="video-quality-selector">
+                        <label>Calidad:</label>
+                        <select id="videoQualitySelect">
+                            <option value="high">1080p HD</option>
+                            <option value="medium" selected>720p</option>
+                            <option value="low">480p</option>
+                        </select>
+                    </div>
+                    
+                    <div class="video-time-display">
+                        <span id="videoCurrentTime">0:00</span> / <span id="videoDuration">0:00</span>
+                    </div>
+                    
+                    <button class="video-download-btn" id="videoDownloadBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        <span>Descargar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- End Video Preview Modal -->
+
+        <!-- Toast Notifications -->
+        <div class="toast-container" id="toastContainer"></div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
